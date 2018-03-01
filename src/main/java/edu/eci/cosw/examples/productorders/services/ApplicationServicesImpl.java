@@ -22,6 +22,10 @@ import edu.eci.cosw.examples.productorders.repositories.ProductsRepository;
 import edu.eci.cosw.samples.model.Despacho;
 import edu.eci.cosw.samples.model.Pedido;
 import edu.eci.cosw.samples.model.Producto;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +67,11 @@ public class ApplicationServicesImpl implements ApplicationServices{
     @Override
     public Despacho dispatchByID(Integer id) throws ServicesException{
         return disprepo.findOne(id);
+    }
+
+    @Override
+    public InputStream dispatchQRByID(Integer id) throws ServicesException,SQLException {
+        return disprepo.dispatchQRByID(id).getQrcode().getBinaryStream();
     }
     
     

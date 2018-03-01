@@ -44,10 +44,9 @@ public class DispatchController {
     @Autowired
     ApplicationServices services;
 
-    
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Despacho> getDespacho(@PathVariable("id") int id) {        
+    public ResponseEntity<Despacho> getDespacho(@PathVariable("id") int id) {
         try {
             return ResponseEntity.ok().body(services.dispatchByID(id));
         } catch (ServicesException ex) {
@@ -56,5 +55,22 @@ public class DispatchController {
         }
     }
 
-    
+    @RequestMapping(value = "/{id}/qrcode", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> getQRCode(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("image/png"))
+                    .body(new InputStreamResource(services.dispatchQRByID(id)));
+        } catch (ServicesException ex) {
+            Logger.getLogger(DispatchController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DispatchController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }

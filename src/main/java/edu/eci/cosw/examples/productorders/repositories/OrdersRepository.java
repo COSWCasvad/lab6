@@ -16,13 +16,17 @@
  */
 package edu.eci.cosw.examples.productorders.repositories;
 
+import edu.eci.cosw.examples.productorders.services.ServicesException;
 import edu.eci.cosw.samples.model.Pedido;
+import java.sql.Blob;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
  * @author hcadavid
  */
 public interface OrdersRepository extends JpaRepository<Pedido, Integer>{
+    
     
 }

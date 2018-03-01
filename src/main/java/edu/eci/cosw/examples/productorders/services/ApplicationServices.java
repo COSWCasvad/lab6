@@ -19,6 +19,9 @@ package edu.eci.cosw.examples.productorders.services;
 import edu.eci.cosw.samples.model.Despacho;
 import edu.eci.cosw.samples.model.Pedido;
 import edu.eci.cosw.samples.model.Producto;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -33,6 +36,8 @@ public interface ApplicationServices {
     
     public List<Producto> getAllProducts() throws ServicesException;;
     
-    public Despacho dispatchByID(Integer id) throws ServicesException;;
+    public Despacho dispatchByID(Integer id) throws ServicesException;
+    
+    public InputStream dispatchQRByID(Integer id) throws ServicesException,SQLException;
     
 }
