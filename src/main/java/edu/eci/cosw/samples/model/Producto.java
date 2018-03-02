@@ -25,19 +25,19 @@ public class Producto implements java.io.Serializable {
 	private static final long serialVersionUID = -4224112129753973637L;
 	private int idproducto;
 	private String nombre;
-	private long precio;
+	private int precio;
 	private Set<DetallePedido> almDetallesPedidos = new HashSet<DetallePedido>(0);
 
 	public Producto() {
 	}
 
-	public Producto(int idproducto, String nombre, long precio) {
+	public Producto(int idproducto, String nombre, int precio) {
 		this.idproducto = idproducto;
 		this.nombre = nombre;
 		this.precio = precio;
 	}
 
-	public Producto(int idproducto, String nombre, long precio,
+	public Producto(int idproducto, String nombre, int precio,
 			Set<DetallePedido> almDetallesPedidos) {
 		this.idproducto = idproducto;
 		this.nombre = nombre;
@@ -65,11 +65,11 @@ public class Producto implements java.io.Serializable {
 	}
 
 	@Column(name = "precio", nullable = false)
-	public long getPrecio() {
+	public int getPrecio() {
 		return this.precio;
 	}
 
-	public void setPrecio(long precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
         

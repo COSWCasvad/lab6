@@ -1,0 +1,2 @@
+select d.vehiculo.placa from Despacho d  inner join d.pedidos as p  inner join p.detallesPedidos as dp inner join dp.producto as prod with prod.idproducto=1
+select p.cliente.idcliente, p.cliente.nombre from Pedido p left join p.detallesPedidos as dp left join dp.producto as prod with prod.precio>6000

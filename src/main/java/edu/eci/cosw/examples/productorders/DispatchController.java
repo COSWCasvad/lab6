@@ -32,6 +32,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import edu.eci.cosw.examples.productorders.services.ApplicationServices;
 import edu.eci.cosw.examples.productorders.services.ServicesException;
+import edu.eci.cosw.samples.model.Pedido;
+import edu.eci.cosw.samples.model.Vehiculo;
+import java.io.IOException;
+import java.util.Iterator;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  *
@@ -71,6 +78,18 @@ public class DispatchController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public ResponseEntity uploadFile(MultipartHttpServletRequest request, @RequestParam(name = "idpedido") int idpedido, @RequestParam(name = "idvehiculo") String idVehiculo) {
+
+        try {
+            services.addDispatch(request,idpedido,idVehiculo);
+        } catch (ServicesException | IOException | SQLException e) {
+            return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
 }
